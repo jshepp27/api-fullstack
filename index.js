@@ -1,21 +1,10 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+require("./services/passport");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.get("/", (req, res) => {
-  res.send({ bye: "buddy" });
-});
-
-app.post("/hello", (req, res) => {
-  console.log(req.body);
-  console.log(req.body.name);
-});
-
-console.log("testing");
+authRoutes(app);
+//new instance of Google Strategy class
 
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT);
